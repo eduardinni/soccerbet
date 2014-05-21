@@ -1,0 +1,58 @@
+<% content_for :page_title, t('.title') %>
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Global</div>
+			
+			<% if global_leaderboard.present? %>
+				<table class="table">
+					<% global_leaderboard.each do |member| %>
+						<tr>
+							<td><%= member[:rank] %></td>
+							<td>
+								<img class="user-image img-rounded" src="<%= user_image_for(member[:member]) %>">
+								<%= user_name_for(member[:member]) %>
+							</td>
+							<td><%= member[:score].to_i %></td>
+						</tr>
+					<% end %>
+				</table>
+			<% else %>
+				<div class="panel-body">
+					<span class="text-muted"><%= t('.no_leaderboard') %></span>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	
+	<div class="col-md-6">
+		<% @pools.each do |pool| %>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading"><%= pool.name %></div>
+						
+						<% if pool_leaderboard(pool).present? %>
+							<table class="table">
+								<% pool_leaderboard(pool).each do |member| %>
+									<tr>
+										<td><%= member[:rank] %></td>
+										<td>
+											<img class="user-image img-rounded" src="<%= user_image_for(member[:member]) %>">
+											<%= user_name_for(member[:member]) %>
+										</td>
+										<td><%= member[:score].to_i %></td>
+									</tr>
+								<% end %>
+							</table>
+						<% else %>
+							<div class="panel-body">
+								<span class="text-muted"><%= t('.no_leaderboard') %></span>
+							</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

@@ -1,0 +1,55 @@
+<div class="panel panel-default">
+	<%= form_for @user_prediction, html: { class: 'form' } do |f| %>
+		<div class="panel-body">
+			<% if @user_prediction.errors.any? %>
+				<div class="alert alert-danger alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<ul>
+						<% @user_prediction.errors.full_messages.each do |message| %>
+							<li><%= message %></li>
+						<% end %>
+					</ul>
+				</div>
+			<% end %>
+	
+			<div class="row row-game-teams">
+				<div class="col-md-5">
+					<div class="panel panel-default panel-team-select">
+						<div class="panel-heading">
+							<h3>
+								<%= image_tag("flags/#{@game.home_team.image}") %><br>
+								<%= @game.home_team.name %>
+							</h3>
+						</div>
+						<div class="panel-body">
+							<%= f.text_field :home_team_goals, class: 'form-control select-goals', maxlength: 2, autocomplete: "off" %>							
+						</div>
+					</div>
+				</div>
+		
+				<div class="col-md-2">
+					<h1>VS</h1>
+				</div>
+		
+				<div class="col-md-5">
+					<div class="panel panel-default panel-team-select">
+						<div class="panel-heading">
+							<h3>
+								<%= image_tag("flags/#{@game.visitor_team.image}") %><br>
+								<%= @game.visitor_team.name %>
+							</h3>
+						</div>
+						<div class="panel-body">
+							<%= f.text_field :visitor_team_goals, class: 'form-control select-goals', maxlength: 2, autocomplete: "off" %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel-footer text-center">
+			<%= f.hidden_field :game_id %>
+			<%= f.submit t("helpers.links.save"), :class => 'btn btn-success' %>
+			<%= link_to t("helpers.links.cancel"), user_predictions_path, :class => 'btn btn-link' %>
+		</div>
+	<% end %>
+</div>

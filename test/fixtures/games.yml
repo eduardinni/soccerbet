@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  home_team_id: 
+  visitor_team_id: 
+  play_at: 2014-05-11 23:56:51
+  pool_id: 
+  team_group_id: 
+
+two:
+  home_team_id: 
+  visitor_team_id: 
+  play_at: 2014-05-11 23:56:51
+  pool_id: 
+  team_group_id: 

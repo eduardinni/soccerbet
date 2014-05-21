@@ -1,0 +1,97 @@
+<% content_for :page_title, t('.title') %>
+
+<div class="panel panel-default">
+	<div class="panel-heading text-right">
+		<%= link_to t('.links.new'), new_game_path(pool: params[:pool]), :class => 'btn btn-default' %>
+	</div>
+	<div class="panel-body">
+		<div class="row" style="margin-bottom:15px">
+			<div class="col-md-12">
+				<ul class="nav nav-pills nav-pills-green">
+					<li class="<%= 'active' if params[:pool].blank? %>"><%= link_to t(:filter_all), games_url %></li>
+					<% @pools.each do |pool| %>
+						<li class="<%= 'active' if pool.id == params[:pool].to_i %>"><%= link_to pool.name, games_url(pool: pool.id) %></li>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<% last_play_at = Time.local( 1999, 1, 1 ) %>
+				<% @games.each do |game| %>
+					
+					
+					<% unless last_play_at.year == game.play_at.year && last_play_at.month == game.play_at.month && last_play_at.day == game.play_at.day %>
+						<div class="row">
+							<div class="col-md-12">
+								<h3 class="pred-games-date"><%= l game.play_at, format: :full_condensed %></h3>
+							</div>
+						</div>
+					<% end %>
+					
+					<div class="row">
+						<div class="col-md-12">
+							<div class="row pred-game-info">
+								<div class="col-md-12">
+									<span class="no-wrap"><%= l game.play_at, format: :hour %> - <%= game.pool.present? ? tag_label(game.pool.name, :pool) : tag_label('ND', :default) %></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row pred-game-wrapper">
+						<div class="col-md-3 col-sm-3 col-xs-2">
+							<div class="pred-team-wrapper">
+								<%= image_tag("flags/#{game.home_team.image}") %><br class="visible-xs">
+								<span class="pred-team-name"><%= game.home_team.shortname %></span>
+							</div>
+						</div>
+						
+						<div class="col-md-2 col-sm-2 col-xs-2 text-center">
+							<% if game.game_result.present? %>
+								<p class="pred-goals">
+									<% if game.game_result.winner == 'h' %>
+										<strong><%= game.game_result.home_team_goals %></strong> : <%= game.game_result.visitor_team_goals %>
+									<% elsif game.game_result.winner == 'v' %>
+										<%= game.game_result.home_team_goals %> : <strong><%= game.game_result.visitor_team_goals %></strong>
+									<% else %>
+										<%= game.game_result.home_team_goals %> : <%= game.game_result.visitor_team_goals %>
+									<% end%>
+								</p>
+							<% else %>
+								<p class="pred-goals">
+									- : -
+								</p>
+							<% end %>
+						</div>
+						
+						<div class="col-md-3 col-sm-3 col-xs-2 text-right">
+							<div class="pred-team-wrapper">
+								<span class="pred-team-name hidden-xs"><%= game.visitor_team.shortname %></span>
+								<%= image_tag("flags/#{game.visitor_team.image}") %>
+								<span class="pred-team-name visible-xs"><%= game.visitor_team.shortname %></span>
+							</div>
+						</div>
+						
+						<div class="col-md-4 col-sm-4 col-xs-6 text-right">
+							<% if game.game_result.present? %>
+								<%= link_to t("helpers.links.edit_result"), edit_game_result_path(game.game_result), :class => 'btn btn-default btn-xs' %>
+							<% else %>
+								<%= link_to t("helpers.links.edit_result"), new_game_result_path(game: game), :class => 'btn btn-default btn-xs' %>
+							<% end %>
+							<%= link_to t("helpers.links.edit"), edit_game_path(game), :class => 'btn btn-default btn-xs' %>
+							<%= link_to t("helpers.links.destroy"), game_path(game),
+								:method => :delete,
+								:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+								:class => 'btn btn-xs btn-danger' %>
+						</div>
+					</div>
+					<% last_play_at = game.play_at %>
+				<% end %>
+				<% if @games.blank? %>
+					<p class="text-center text-muted"><%= t('info.no_games') %></p>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

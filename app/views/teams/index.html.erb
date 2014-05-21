@@ -1,0 +1,29 @@
+<% content_for :page_title, t('.title') %>
+
+<div class="panel panel-default">
+	<div class="panel-heading text-right"><%= link_to t('.links.new'), new_team_path, :class => 'btn btn-default' %></div>
+	<div class="panel-body">
+		<table class="table">
+			<tbody>
+				<% @teams.each do |team| %>
+					<tr>
+						<td width="50"><%= image_tag("flags/#{team.image}") %></td>
+						<td width="50"><span class="team-shortname"><%= team.shortname %></span></td>
+				        <td><%= link_to team.name, team_path(team) %></td>
+			
+						<td class="text-right">
+							<%= link_to t("helpers.links.edit"), edit_team_path(team), :class => 'btn btn-default btn-xs' %>
+							<%= link_to t("helpers.links.destroy"), team_path(team),
+								:method => :delete,
+								:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+								:class => 'btn btn-xs btn-danger' %>
+						</td>
+					</tr>
+				<% end %>
+				<% if @teams.blank? %>
+					<p class="text-center text-muted"><%= t('info.no_teams') %></p>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

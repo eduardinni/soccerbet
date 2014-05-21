@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Game:</strong>
+  <%= @game_result.game %>
+</p>
+
+<p>
+  <strong>Home team goals:</strong>
+  <%= @game_result.home_team_goals %>
+</p>
+
+<p>
+  <strong>Visitor team goals:</strong>
+  <%= @game_result.visitor_team_goals %>
+</p>
+
+<p>
+  <strong>Winner:</strong>
+  <%= @game_result.winner %>
+</p>
+
+<%= link_to 'Edit', edit_game_result_path(@game_result) %> |
+<%= link_to 'Back', game_results_path %>

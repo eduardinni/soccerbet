@@ -1,0 +1,74 @@
+<% content_for :page_title, t('.title') %>
+<div class="row">
+	<div class="col-md-12">
+		<div class="well">
+			<h3>GENERALES</h3>
+			<ul>
+				<li>Para poder participar en el juego se debe cubrir la cuota de inscripción.</li>
+				<li>El juego solamente es para la fase de eliminatorias del mundial.</li>
+				<li>
+					El juego se divide en 4 quinielas:
+					<ul>
+						<li><strong>Quiniela Ronda 1:</strong> Primer partido de todos los equipos (16 partidos).</li>
+						<li><strong>Quiniela Ronda 2:</strong> Segundo partido de todos los equipos (16 partidos).</li>
+						<li><strong>Quiniela Ronda 3:</strong> Tercer partido de todos los equipos (16 partidos).</li>
+						<li><strong>Quiniela Global:</strong> Todos los partidos de la fase de eliminatorias (48 partidos)</li>
+					</ul>
+				</li>
+			</ul>
+			
+			<h3>CÓMO SE JUEGA</h3>
+			<p>Debes iniciar sesión con tu cuenta de Facebook dentro del sitio web de la quiniela.</p>
+			<p>Debes de capturar tus predicciones para cada partido dentro de la sección de <%= link_to t('app.menu.my_pools'), user_predictions_path %>.<br>
+				Una vez capturado el marcador, puedes editarlo las veces necesarias hasta 60 minutos antes del inicio del partido.</p>
+
+			<h3>PUNTUACIÓN</h3>
+			<p>Si tu predicción es igual al resultado del partido (ganador, perdedor o empate) obtendrás <strong>1 punto.</strong></p>
+			<p>Si tu predicción es exactamente igual al marcador del partido obtendrás <strong>3 puntos.</strong></p>
+			
+			<h3>TRANSPARENCIA</h3>
+			<p>Todos los participantes de la quiniela podrán ver en cualquier momento las predicciones de los otros participantes, así como la tabla de posiciones para cada quiniela.</p>
+			<p>Para ver las <strong>tablas de posiciones</strong>, se debe entrar a la sección <%= link_to t('app.menu.leaderboards'), leaderboards_path %>.</p>
+			<p>Para ver las <strong>predicciones de todos los participantes de la quiniela</strong>, se debe entrar a la sección <%= link_to t('app.menu.statistics'), stats_path %>. Dentro de esta sección se pueden ver los promedios de todas las predicciones (tendencias), para cada partido hay un botón <button class="btn btn-default btn-xs">Ver todas las predicciones</button> el cual lleva a la tabla con todas las predicciones de los participantes de la quiniela para ese partido.</p>
+			
+			<h3>CUOTA DE INSCRIPCIÓN</h3>
+			<p>Para poder participar en el juego, debes de pagar una cuota de inscripción de <strong>$250 pesos</strong>. Con la cual participarás en las 4 quinielas.</p>
+			<p>La fecha <strong>límite para pagar es el 10 de junio de 2014</strong>. No habrá prorroga bajo ninguna circunstancia.</p>
+			
+			<h3>PREMIOS</h3>
+			<p>Tu cuota de inscripción se dividirá en 4 partes (una para cada quiniela), de acuerdo a la siguiente tabla:</p>
+			<table class="table">
+				<tr>
+					<td width="50%">Quiniela Ronda 1</td>
+					<td>$50</td>
+				</tr>
+				<tr>
+					<td>Quiniela Ronda 2</td>
+					<td>$50</td>
+				</tr>
+				<tr>
+					<td>Quiniela Ronda 3</td>
+					<td>$50</td>
+				</tr>
+				<tr>
+					<td>Quiniela Global</td>
+					<td>$100</td>
+				</tr>
+			</table>
+			<p>Habrá solamente <strong>un premio por quiniela</strong> y será otorgado a quien haya obtenido más puntos en la respetica quiniela.</p>
+			<p>El premio será calculado de acuerdo al número de participantes, multiplicando el total de participantes por la parte correspondiente descrita en la tabla anterior.</p>
+			
+			<h3>EMPATES</h3>
+			<p>En caso de empate en cualquiera de las quinielas, el total del premio correspondiente se dividirá entre la cantidad de participantes que hayan coincidido en el empate.</p>
+		</div>
+		
+		<% unless is_user_agreed_rules? %>
+			<div class="well text-center">
+				<%= form_tag pages_rules_path do %>
+					<input type="hidden" name="agree" value="1">
+					<button type="submit" class="btn btn-success btn-lg"><i class="fa fa-thumbs-o-up"></i> Estoy de acuerdo</button>
+				<% end %>
+			</div>
+		<% end %>
+	</div>
+</div>

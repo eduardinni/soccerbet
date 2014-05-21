@@ -1,0 +1,120 @@
+es:
+  site_name: "Quiniela 2014"
+  activerecord:
+    models:
+      game: 'Partido'
+      pool: 'Quiniela'
+      team: 'Equipo'
+      team_group: 'Grupo'
+    attributes:
+      game:
+        home_team: "Local"
+        visitor_team: "Visitante"
+        pool: "Quiniela"
+      pool:
+        name: 'Nombre'
+        active: 'Activa'
+      team:
+        name: 'Nombre'
+        shortname: 'Siglas'
+        image: 'Imagen'
+      team_group:
+
+  time:
+    formats:
+      hour: '%I:%M %p'
+      full_condensed: '%A, %d %B'
+      full_condensed_year: '%A, %d %B %Y'
+  
+  
+  sign_in_facebook: 'Iniciar sesión con Facebook'
+  sign_out: 'Salir'
+  filter_all: 'Todos'
+  
+  flash:
+    created_success: 'Guardado correctamente.'
+    edited_success: 'Cambios guardados correctamente.'
+    destroyed_success: 'Eliminado correctamente.'
+    access_denied: 'Acceso denegado.'
+    pool_not_active: 'Quiniela no disponible.'
+    edit_time_expired: 'El tiempo de edición de marcadores ha terminado.'
+    not_paid: 'Usuario no activo.'
+    rules_not_agreed: 'Debes de aceptar las reglas del juego antes de continuar.'
+    rules_agreed: 'Perfecto! Ahora puedes comenzar a capturar tus predicciones.'
+
+  info:
+    no_games: 'No hay partidos'
+    no_pools: 'No hay quinielas'
+    no_teams: 'No hay equipos'
+  
+  app:
+    modules:
+      my_points: 'Mi puntuación'
+      global_score: 'Global'
+      points_abbr: 'PTS'
+      rank_abbr: 'LUG'
+      admin: 'Administración'
+    menu:
+      my_pools: 'Mis quinielas'
+      leaderboards: 'Posiciones'
+      statistics: 'Estadísticas'
+      rules: 'Reglas'
+      
+      
+  pools:
+    index:
+      title: 'Quinielas'
+      links:
+        new: 'Nueva'
+    new:
+      title: 'Nueva quiniela'
+    edit:
+      title: 'Editar quiniela'
+    leaderboards:
+      title: 'Posiciones'
+      no_leaderboard: 'No hay posiciones'
+    stats:
+      title: 'Estadísticas'
+      view_all_predictions: 'Ver todas las predicciones'
+  
+  games:
+    index:
+      title: 'Partidos'
+      links:
+        new: 'Nuevo'
+    new:
+      title: 'Nuevo partido'
+    edit:
+      title: 'Editar partido'
+    predictions:
+      title: 'Predicciones para el partido'
+      back_button: 'Todas las estadísticas'
+  
+  game_results:
+    new:
+      title: "Marcador oficial"
+    edit:
+      title: "Marcador oficial"
+  
+  teams:
+    index:
+      title: 'Equipos'
+      links:
+        new: 'Nuevo'
+    new:
+      title: 'Nuevo equipo'
+    edit:
+      title: 'Editar equipo'
+  
+  user_predictions:
+    index:
+      title: 'Mis quinielas'
+      final: 'Final'
+    new:
+      title: 'Mi predicción para este partido'
+    edit:
+      title: 'Mi predicción para este partido'
+
+  pages:
+    rules:
+      title: 'Reglas del juego'

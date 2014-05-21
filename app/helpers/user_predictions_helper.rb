@@ -1,0 +1,2 @@
+module UserPredictionsHelper
+end

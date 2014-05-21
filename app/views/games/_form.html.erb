@@ -1,0 +1,70 @@
+<div class="panel panel-default">
+	<%= form_for @game, html: { class: 'form' } do |f| %>
+		<div class="panel-body">
+			<% if @game.errors.any? %>
+				<div class="alert alert-danger alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<ul>
+						<% @game.errors.full_messages.each do |message| %>
+							<li><%= message %></li>
+						<% end %>
+					</ul>
+				</div>
+			<% end %>
+			
+			<div class="row row-game-date">
+				<div class="col-md-12">
+					<div class="form form-inline">
+						<div class="text-center">
+							<div class="col-md-12">
+								<%= f.datetime_select :play_at, {}, {:class => 'form-control '} %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+			<div class="row row-game-teams">
+				<div class="col-md-5">
+					<div class="panel panel-primary panel-team-select">
+						<div class="panel-heading"><h3>Local</h3></div>
+						<div class="panel-body">
+							<%= f.collection_select :home_team_id, Team.all, :id, :name, { include_blank: true }, { class: 'form-control input-lg' } %>
+						</div>
+					</div>
+				</div>
+		
+				<div class="col-md-2">
+					<h1>VS</h1>
+				</div>
+		
+				<div class="col-md-5">
+					<div class="panel panel-primary panel-team-select">
+						<div class="panel-heading"><h3>Visitante</h3></div>
+						<div class="panel-body">
+							<%= f.collection_select :visitor_team_id, Team.all, :id, :name, { include_blank: true }, { class: 'form-control input-lg' } %>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-horizontal">
+						<div class="form-group">
+							<%= f.label :pool_id, "Quiniela", :class => 'control-label col-md-2' %>
+							<div class="col-md-5">
+								<%= f.collection_select :pool_id, Pool.unscoped.all, :id, :name, { include_blank: true }, { class: 'form-control' } %>
+							</div>
+						</div>
+					</div>
+			
+				</div>
+			</div>
+		</div>
+		<div class="panel-footer">
+			<%= f.submit t("helpers.links.save"), :class => 'btn btn-success' %>
+			<%= link_to t("helpers.links.cancel"), games_path, :class => 'btn btn-link' %>
+		</div>
+	<% end %>
+</div>

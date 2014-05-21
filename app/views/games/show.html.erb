@@ -1,0 +1,27 @@
+<%- model_class = Game -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:home_team_id) %>:</strong></dt>
+  <dd><%= @game.home_team_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:visitor_team_id) %>:</strong></dt>
+  <dd><%= @game.visitor_team_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:datetime) %>:</strong></dt>
+  <dd><%= @game.datetime %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:pool_id) %>:</strong></dt>
+  <dd><%= @game.pool_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:team_group_id) %>:</strong></dt>
+  <dd><%= @game.team_group_id %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              games_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_game_path(@game), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              game_path(@game),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

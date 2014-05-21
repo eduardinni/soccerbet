@@ -1,0 +1,13 @@
+.row-game-date{
+	margin: 20px 0 35px 0;
+}
+.row-game-teams{
+	margin:20px 0;
+	text-align:center;
+}
+.panel-team-select h3{
+	margin:0;
+}
+.flag-sm{
+	height:25px;
+}

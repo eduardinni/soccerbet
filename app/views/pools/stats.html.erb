@@ -1,0 +1,90 @@
+<% content_for :page_title, t('.title') %>
+
+<div class="row" style="margin-top:-30px; margin-bottom:20px;">
+	<div class="col-md-12">
+		<div class="alert alert-default text-muted">
+			<p>Las estadísticas se obtienen de las predicciones hechas por todos los participantes de la quiniela.</p>
+			<p>Leyenda:</p>
+			<p>
+				<span class="label label-primary">Local</span>
+				<span class="label label-default">Empate</span>
+				<span class="label label-info">Visitante</span>
+			</p>
+		</div>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom:15px">
+	<div class="col-md-12">
+		<ul class="nav nav-pills nav-pills-green">
+			<li class="<%= 'active' if params[:pool].blank? %>"><%= link_to t(:filter_all), stats_path %></li>
+			<% Pool.all.each do |pool| %>
+				<li class="<%= 'active' if pool.id == params[:pool].to_i %>">
+					<%= link_to pool.name, stats_path(pool: pool.id) %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<% last_play_at = Time.local( 1999, 1, 1 ) %>
+		<% @games.each do |game| %>
+		
+			<% game_user_prediction = @user_predictions.where(game: game).first %>
+
+			<% unless last_play_at.year == game.play_at.year && last_play_at.month == game.play_at.month && last_play_at.day == game.play_at.day %>
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="pred-games-date"><%= l game.play_at, format: :full_condensed %></h3>
+					</div>
+				</div>
+			<% end %>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row pred-game-info">
+						<div class="col-md-12">
+							<span class="no-wrap"><%= l game.play_at, format: :hour %> - 
+							<%= game.pool.present? ? tag_label(game.pool.name, :pool) : tag_label('ND', :default) %></span>
+							<%= link_to t('.view_all_predictions'), game_predictions_path(game), class: 'btn btn-default btn-xs pull-right' %>
+						</div>
+					</div>
+					<div class="row pred-game-wrapper">
+						<div class="col-md-4 col-sm-4 col-xs-2">
+							<div class="pred-team-wrapper">
+								<%= image_tag("flags/#{game.home_team.image}") %>
+								<span class="pred-team-name hidden-xs"><%= game.home_team.name %></span>
+								<span class="pred-team-name visible-xs"><%= game.home_team.shortname %></span>
+							</div>
+						</div>
+
+						<div class="col-md-4 col-sm-4 col-xs-8 text-center">
+							<p class="pred-pool">
+								<span class="label label-primary"><%= odds_for_home_team(game) %>%</span>
+								<span class="label label-default"><%= odds_for_draw_game(game) %>%</span>
+								<span class="label label-info"><%= odds_for_visitor_team(game) %>%</span>
+							</p>
+						</div>
+
+						<div class="col-md-4 col-sm-4 col-xs-2 text-right">
+							<p class="pred-team-wrapper">
+								<span class="pred-team-name hidden-xs"><%= game.visitor_team.name %></span>
+								<%= image_tag("flags/#{game.visitor_team.image}") %>
+								<span class="pred-team-name visible-xs"><%= game.visitor_team.shortname %></span>
+							</p>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>	
+
+			<% last_play_at = game.play_at %>
+		<% end %>
+		<% if @games.blank? %>
+			<p class="text-center text-muted"><%= t('info.no_games') %></p>
+		<% end %>
+	</div>
+</div>

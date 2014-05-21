@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_prediction.user %>
+</p>
+
+<p>
+  <strong>Game:</strong>
+  <%= @user_prediction.game %>
+</p>
+
+<p>
+  <strong>Home team goals:</strong>
+  <%= @user_prediction.home_team_goals %>
+</p>
+
+<p>
+  <strong>Visitor team goals:</strong>
+  <%= @user_prediction.visitor_team_goals %>
+</p>
+
+<p>
+  <strong>Winner:</strong>
+  <%= @user_prediction.winner %>
+</p>
+
+<p>
+  <strong>Points:</strong>
+  <%= @user_prediction.points %>
+</p>
+
+<%= link_to 'Edit', edit_user_prediction_path(@user_prediction) %> |
+<%= link_to 'Back', user_predictions_path %>

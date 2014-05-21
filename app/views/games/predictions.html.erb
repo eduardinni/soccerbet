@@ -1,0 +1,79 @@
+<% content_for :page_title, t('.title') %>
+
+<div class="row">
+	<div class="col-md-12">
+		<%= link_to stats_path do %>
+			<i class="fa fa-arrow-left"></i> <%= t('.back_button') %>
+		<% end %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<h3><%= l @game.play_at, format: :full_condensed %>
+			<span class="text-muted"><%= l @game.play_at, format: :hour %></span></h3>
+		<table class="table">
+			<tr>
+				<th width="40%"></th>
+				<th width="10%"></th>
+				<th width="15%" class="text-center">
+					<%= image_tag("flags/#{@game.home_team.image}") %> <%= @game.home_team.shortname %>
+				</th>
+				<th width="15%" class="text-center">X</th>
+				<th width="15%" class="text-center">
+					<%= image_tag("flags/#{@game.visitor_team.image}") %> <%= @game.visitor_team.shortname %>
+				</th>
+			</tr>
+			<% if @game.game_result.present? %>
+				<tr class="success">
+					<th>MARCADOR FINAL</th>
+					<th></th>
+					<th class="text-center"><%= @game.game_result.home_team_goals  %></th>
+					<th></th>
+					<th class="text-center"><%= @game.game_result.visitor_team_goals  %></th>
+				</tr>
+			<% end %>
+			<tr class="info">
+				<th>PROMEDIO PREDICCIONES</th>
+				<th></th>
+				<th class="text-center"><%= odds_for_home_team(@game) %>%</th>
+				<th class="text-center"><%= odds_for_draw_game(@game) %>%</th>
+				<th class="text-center"><%= odds_for_visitor_team(@game) %>%</th>
+			</tr>
+			<% @users.each do |user| %>
+				<% user_prediction = user.predictions.where(game: @game).take %>
+				<tr>
+					<td>
+						<img class="user-image img-rounded" src="<%= user_image_for(user) %>">
+						<%= user.name %>
+					</td>
+					<% if user_prediction.present? %>
+						<td class="text-center">
+							<% if @game.game_result.present? %>
+								<% if user_prediction.points == 3 %>
+									<span class="label label-success"><span class="fa fa-plus"></span> 3 puntos</span>
+								<% elsif user_prediction.points == 1 %>
+									<span class="label label-success"><span class="fa fa-plus"></span> 1 punto</span>
+								<% elsif user_prediction.points == 0 %>
+									<span class="label label-default">0 puntos</span>
+								<% end %>
+							<% end %>
+						</td>
+						<td class="text-center <%= 'warning' if user_prediction.winner == 'h' %>">
+							<%= user_prediction.home_team_goals %>
+						</td>
+						<td class="text-center <%= 'warning' if user_prediction.winner == 'd' %>">
+						<td class="text-center <%= 'warning' if user_prediction.winner == 'v' %>">
+							<%= user_prediction.visitor_team_goals %>
+						</td>
+					<% else %>
+						<td></td>
+						<td class="text-center">-</td>
+						<td class="text-center"></td>
+						<td class="text-center">-</td>
+					<% end %>
+				</tr>
+			<% end %>
+		</table>
+	</div>
+</div>

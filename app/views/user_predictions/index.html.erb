@@ -1,0 +1,134 @@
+<% content_for :page_title, t('.title') %>
+
+<div class="row">
+	<div class="col-md-12">
+		<% if is_user_agreed_rules? %>
+			<div class="well well-scoreboard sidebar-nav hidden-md hidden-lg visible-sm visible-xs">
+				<h3><%= t('app.modules.my_points') %></h3>
+				<p class="text-right scoreboard-legends"><span><%= t('app.modules.points_abbr') %></span> <span><%= t('app.modules.rank_abbr') %></span></p>
+				<ul class="nav nav-pills nav-stacked nav-scoreboard">
+					<% @my_pools.each do |pool| %>
+						<li>
+							<%= pool.name %>
+							<span class="scoreboard-rank pull-right"><%= pool_user_rank(pool, current_user) %></span>
+							<span class="scoreboard-score pull-right"><%= pool_user_points(pool, current_user) %></span>
+						</li>
+					<% end %>
+					<li class="divider"></li>
+					<li>
+						<%= t('app.modules.global_score') %>							
+						<span class="scoreboard-rank pull-right"><%= global_user_rank(current_user) %></span>
+						<span class="scoreboard-score scoreboard-score-global pull-right"><%= global_user_points(current_user) %></span>
+					</li>
+				</ul>
+			</div>
+		<% end %>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom:15px">
+	<div class="col-md-12">
+		<ul class="nav nav-pills nav-pills-green">
+			<li class="<%= 'active' if params[:pool].blank? %>"><%= link_to t(:filter_all), user_predictions_url %></li>
+			<% Pool.all.each do |pool| %>
+				<li class="<%= 'active' if pool.id == params[:pool].to_i %>">
+					<%= link_to pool.name, user_predictions_url(pool: pool.id) %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<% last_play_at = Time.local( 1999, 1, 1 ) %>
+		<% @games.each do |game| %>
+		
+			<% game_user_prediction = @user_predictions.where(game: game).first %>
+
+			<% unless last_play_at.year == game.play_at.year && last_play_at.month == game.play_at.month && last_play_at.day == game.play_at.day %>
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="pred-games-date"><%= l game.play_at, format: :full_condensed %></h3>
+					</div>
+				</div>
+			<% end %>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row pred-game-info">
+						<div class="col-md-12">
+							<span class="no-wrap"><%= l game.play_at, format: :hour %> - 
+							
+							<%= game.pool.present? ? tag_label(game.pool.name, :pool) : tag_label('ND', :default) %></span>
+							
+							<% if game.game_result.present? and game_user_prediction.present? and game_user_prediction.points.present?%>
+								<% if game_user_prediction.points == 3 %>
+									- <span class="label label-success"><span class="fa fa-plus"></span> 3 puntos</span>
+								<% elsif game_user_prediction.points == 1 %>
+									- <span class="label label-success"><span class="fa fa-plus"></span> 1 punto</span>
+								<% elsif game_user_prediction.points == 0 %>
+									- <span class="label label-default">0 puntos</span>
+								<% end %>
+							<% end %>
+						</div>
+					</div>
+					<div class="row pred-game-wrapper">
+						<div class="col-md-4 col-sm-4 col-xs-5">
+							<div class="pred-team-wrapper">
+								<%= image_tag("flags/#{game.home_team.image}") %>
+								<span class="pred-team-name hidden-xs"><%= game.home_team.name %></span>
+								<span class="pred-team-name visible-xs"><%= game.home_team.shortname %></span>
+							</div>
+						</div>
+
+						<div class="col-md-4 col-sm-4 col-xs-2 text-center">
+							<% if game_user_prediction.present? %>
+								<p class="pred-goals">
+									<% if game_user_prediction.winner == 'h' %>
+										<strong><%= game_user_prediction.home_team_goals %></strong> : <%= game_user_prediction.visitor_team_goals %>
+									<% elsif game_user_prediction.winner == 'v' %>
+										<%= game_user_prediction.home_team_goals %> : <strong><%= game_user_prediction.visitor_team_goals %></strong>
+									<% else %>
+										<%= game_user_prediction.home_team_goals %> : <%= game_user_prediction.visitor_team_goals %>
+									<% end%>
+								</p>
+								<% if game.ontime_to_edit? %>
+									<%= link_to t("helpers.links.edit"), edit_user_prediction_path(game_user_prediction), :class => 'btn btn-default btn-xs' %>
+								<% end %>
+							<% else %>
+								<p class="pred-goals">
+									- : -
+								</p>
+								<% if game.ontime_to_edit? %>
+									<%= link_to t("helpers.links.edit"), new_user_prediction_path(game: game), :class => 'btn btn-default btn-xs' %>
+								<% end %>
+							<% end %>
+							
+							<% if game.game_result.present? %>
+								<span class="label label-primary">
+									Final - <%= game.game_result.home_team_goals %> : <%= game.game_result.visitor_team_goals %>
+								</span>
+							<% end %>
+						</div>
+
+						<div class="col-md-4 col-sm-4 col-xs-5 text-right">
+							<p class="pred-team-wrapper">
+								<span class="pred-team-name hidden-xs"><%= game.visitor_team.name %></span>
+								<%= image_tag("flags/#{game.visitor_team.image}") %>
+								<span class="pred-team-name visible-xs"><%= game.visitor_team.shortname %></span>
+							</p>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>	
+
+			<% last_play_at = game.play_at %>
+		<% end %>
+		<% if @games.blank? %>
+			<p class="text-center text-muted"><%= t('info.no_games') %></p>
+		<% end %>
+	</div>
+</div>

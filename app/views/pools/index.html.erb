@@ -1,0 +1,28 @@
+<% content_for :page_title, t('.title') %>
+
+<div class="panel panel-default">
+	<div class="panel-heading text-right"><%= link_to t('.links.new'), new_pool_path, class: 'btn btn-default' %></div>
+	<div class="panel-body">
+		<table class="table">
+			<tbody>
+				<% @pools.each do |pool| %>
+					<tr>
+						<td><%= pool.active? ? tag_label('Activo', :success) : tag_label('Inactiva', :default) %></td>
+						<td><%= link_to pool.name, pool_path(pool) %></td>
+						<td class="text-right">
+							<%= link_to t("helpers.links.edit"), edit_pool_path(pool), class: 'btn btn-default btn-xs' %>
+							<%= link_to t("helpers.links.destroy"), pool_path(pool),
+								:method => :delete,
+								:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", default: 'Are you sure?')) },
+								:class => 'btn btn-xs btn-danger' %>
+						</td>
+					</tr>
+				<% end %>
+				<% if @pools.blank? %>
+					<p class="text-center text-muted"><%= t('info.no_pools') %></p>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+

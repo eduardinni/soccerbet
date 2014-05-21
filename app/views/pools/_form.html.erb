@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+	<%= form_for @pool, html: { class: 'form-horizontal' } do |f| %>
+		<div class="panel-body">
+			<% if @pool.errors.any? %>
+				<div class="alert alert-danger alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<ul>
+						<% @pool.errors.full_messages.each do |message| %>
+							<li><%= message %></li>
+						<% end %>
+					</ul>
+				</div>
+			<% end %>
+	
+			<div class="form-group">
+				<%= f.label :name, class: 'control-label col-md-2' %>
+				<div class="col-md-5">
+					<%= f.text_field :name, class: 'form-control' %>
+				</div>
+			</div>
+			<div class="form-group">
+				<%= f.label :active, :class => 'control-label col-md-2' %>
+				<div class="col-md-5">
+					<%= f.check_box :active %>			
+				</div>
+			</div>
+		</div>
+		<div class="panel-footer">
+			<%= f.submit t("helpers.links.save"), :class => 'btn btn-success' %>
+			<%= link_to t("helpers.links.cancel"), pools_path, :class => 'btn btn-link' %>
+		</div>
+	<% end %>
+</div>

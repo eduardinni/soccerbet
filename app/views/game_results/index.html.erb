@@ -1,0 +1,31 @@
+<h1>Listing game_results</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Game</th>
+      <th>Home team goals</th>
+      <th>Visitor team goals</th>
+      <th>Winner</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @game_results.each do |game_result| %>
+      <tr>
+        <td><%= game_result.game %></td>
+        <td><%= game_result.home_team_goals %></td>
+        <td><%= game_result.visitor_team_goals %></td>
+        <td><%= game_result.winner %></td>
+        <td><%= link_to 'Show', game_result %></td>
+        <td><%= link_to 'Edit', edit_game_result_path(game_result) %></td>
+        <td><%= link_to 'Destroy', game_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Game result', new_game_result_path %>
