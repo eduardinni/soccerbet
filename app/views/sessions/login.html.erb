@@ -1,7 +1,7 @@
 <div class="row login-box">
 	<div class="col-md-12 text-center">
 		<p><%= image_tag('brasil2014.png', alt: "Brasil 2014", class: "img-responsive logo-login") %></p>
-		<h1>Quiniela Lomelí</h1>
+		<h1><%= t(:site_name) %></h1>
 		<%= link_to "/auth/facebook", id: "sign_in", class: "btn btn-primary btn-lg btn-login" do %>
 			<i class="fa fa-facebook fa-lg"></i> <%= t(:sign_in_facebook) %>
 		<% end %>
