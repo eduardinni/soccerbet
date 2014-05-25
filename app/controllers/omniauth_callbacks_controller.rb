@@ -1,4 +1,6 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_before_filter :user_agreed_rules?
+  
   def all
     user = User.from_omniauth(request.env["omniauth.auth"])
     if user.persisted?
