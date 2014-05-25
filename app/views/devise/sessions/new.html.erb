@@ -1,0 +1,40 @@
+<div class="row login-box">
+	<div class="col-md-12 text-center">
+		<%= bootstrap_flash %>
+		<p><%= image_tag('soccerbet_logo.png', alt: "SoccerBet", class: "img-responsive logo-login") %></p>
+		<p class="lead"><%= t(:site_name) %></p>
+		
+		<%= link_to user_omniauth_authorize_path(:facebook), id: "sign_in", class: "btn btn-primary btn-lg btn-login-fb" do %>
+			<i class="fa fa-facebook fa-lg"></i> <%= t('sign_in.facebook') %>
+		<% end %>
+		
+		<div class="login-divider"></div>
+		
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2 text-left">
+				<p class="lead"><%= t('sign_in.title') %></p>
+				<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+					<div class="form-group">
+						<%= f.email_field :email, autofocus: true, class: "form-control", placeholder: t('sign_in.email') %>
+					</div>
+					<div class="form-group" style="margin-bottom:0">
+						<%= f.password_field :password, autocomplete: 'off', class: "form-control", placeholder: t('sign_in.password') %>
+					</div>
+					<div class="form-group signin-toolbox">
+						<% if devise_mapping.rememberable? -%>
+							<%= f.check_box :remember_me %> <%= f.label :remember_me, t('sign_in.remember'), class: "link-remember" %> &nbsp;&bull;&nbsp; 
+							<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+								<%= link_to t('sign_in.forgot_password'), new_password_path(resource_name), class: "link-forgot-pwd" %>
+							<% end -%>
+						<% end -%>
+					</div>
+					<%= f.submit t('sign_in.submit'), class: 'btn btn-default' %>
+					<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+						<%= link_to t('sign_up.title'), new_registration_path(resource_name), class: "btn btn-link" %>
+					<% end -%>
+				<% end %>
+
+			</div>
+		</div>
+	</div>
+</div>

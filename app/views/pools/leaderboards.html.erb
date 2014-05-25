@@ -8,7 +8,7 @@
 				<table class="table">
 					<% global_leaderboard.each do |member| %>
 						<tr>
-							<td><%= member[:rank] %></td>
+							<td width="30"><%= member[:rank] %></td>
 							<td>
 								<img class="user-image img-rounded" src="<%= user_image_for(member[:member]) %>">
 								<%= user_name_for(member[:member]) %>
@@ -26,6 +26,44 @@
 	</div>
 	
 	<div class="col-md-6">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="nav nav-tabs">
+					<% @pools.each_with_index do |pool, index| %>
+						<li class="<%= 'active' if index == 0 %>">
+							<a href="<%= "#pool_#{pool.id}" %>" data-toggle="tab"><%= pool.name %></a>
+						</li>
+					<% end %>
+				</ul>
+				<div class="tab-content tabs-leaderboard">
+					<% @pools.each_with_index do |pool, index| %>
+						<div class="tab-pane <%= 'active' if index == 0 %>" id="<%= "pool_#{pool.id}" %>">
+							<% if pool_leaderboard(pool).present? %>
+								<table class="table">
+									<% pool_leaderboard(pool).each do |member| %>
+										<tr>
+											<td width="30"><%= member[:rank] %></td>
+											<td>
+												<img class="user-image img-rounded" src="<%= user_image_for(member[:member]) %>">
+												<%= user_name_for(member[:member]) %>
+											</td>
+											<td><%= member[:score].to_i %></td>
+										</tr>
+									<% end %>
+								</table>
+							<% else %>
+								<div class="panel-body">
+									<span class="text-muted"><%= t('.no_leaderboard') %></span>
+								</div>
+							<% end %>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!--<div class="col-md-6">
 		<% @pools.each do |pool| %>
 			<div class="row">
 				<div class="col-md-12">
@@ -54,5 +92,5 @@
 				</div>
 			</div>
 		<% end %>
-	</div>
+	</div>-->
 </div>

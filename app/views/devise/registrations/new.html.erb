@@ -1,0 +1,39 @@
+<div class="row login-box">
+	<div class="col-md-12 text-center">
+		<p><%= image_tag('soccerbet_logo.png', alt: "SoccerBet", class: "img-responsive logo-login") %></p>
+		<p class="lead"><%= t(:site_name) %></p>
+		
+		<%= bootstrap_flash %>
+		<% if devise_error_messages! %>
+			<div class="alert alert-danger alert-dismissable text-left">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<%= devise_error_messages! %>
+			</div>
+		<% end %>
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2 text-left">
+				<p class="lead"><%= t('sign_up.title') %></p>
+				<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+					<div class="form-group">
+						<%= f.label :name, t('sign_up.name') %>
+						<%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "" %>
+					</div>
+					<div class="form-group">
+						<%= f.label :email, t('sign_up.email') %>
+						<%= f.email_field :email, class: "form-control", placeholder: "" %>
+					</div>
+					<div class="form-group">
+						<%= f.label :password, t('sign_up.password') %>
+						<%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "" %>
+					</div>
+					<div class="form-group">
+						<%= f.label :password_confirmation, t('sign_up.password_confirm') %>
+						<%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", placeholder: "" %>
+					</div>
+					<%= f.submit t('sign_up.submit'), class: 'btn btn-success' %>
+				<% end %>
+
+			</div>
+		</div>
+	</div>
+</div>

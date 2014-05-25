@@ -6,6 +6,7 @@ es:
       pool: 'Quiniela'
       team: 'Equipo'
       team_group: 'Grupo'
+      user: 'Usuario'
     attributes:
       game:
         home_team: "Local"
@@ -18,7 +19,11 @@ es:
         name: 'Nombre'
         shortname: 'Siglas'
         image: 'Imagen'
+      user:
+        email: 'Correo electrónico'
+        password: 'Contraseña'
       team_group:
+    
 
   time:
     formats:
@@ -27,8 +32,23 @@ es:
       full_condensed_year: '%A, %d %B %Y'
   
   
-  sign_in_facebook: 'Iniciar sesión con Facebook'
+  sign_in:
+    title: 'Iniciar sesión'
+    facebook: 'Iniciar sesión con Facebook'
+    email: 'Correo electrónico'
+    password: 'Contraseña'
+    remember: 'Recordarme'
+    forgot_password: '¿Olvidaste tu contraseña?'
+    submit: 'Entrar'
+  sign_up:
+    title: 'Registrarse'
+    name: 'Nombre completo'
+    email: 'Correo electrónico'
+    password: 'Contraseña'
+    password_confirm: 'Confirmar contraseña'
+    submit: 'Registrarse'
   sign_out: 'Salir'
+  sign_in_successfully: 'Sesión iniciada'
   filter_all: 'Todos'
   
   flash:

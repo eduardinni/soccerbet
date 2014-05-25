@@ -27,7 +27,13 @@
 			<a class="navbar-brand" href="/"><%= t(:site_name) %></a>
 
 			<% if current_user %>
-				<p class="navbar-text navbar-right"><img class="user-image img-rounded" src="<%= current_user.image %>"> <strong><%= current_user.name %> &bull;</strong> <%= link_to t(:sign_out), signout_path, id: "sign_out", class: 'btn-signout' %></p>
+				<p class="navbar-text navbar-right">
+					<% if current_user.image.present? %>
+						<img class="user-image img-rounded" src="<%= current_user.image %>">
+					<% else %>
+						<img class="user-image img-rounded" src="<%= asset_path('default_avatar.jpg') %>">
+					<% end %>
+					<strong><%= current_user.name %> &bull;</strong> <%= link_to t(:sign_out), destroy_user_session_path, method: :delete, id: "sign_out", class: 'btn-signout' %></p>
 			<% else %>
 				<div class="navbar-right">
 					<%= link_to "/auth/facebook", id: "sign_in", class: "btn navbar-btn btn-primary btn-sm" do %>
@@ -53,13 +59,18 @@
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="li-username-photo">
-						<img class="user-image img-rounded" src="<%= current_user.image %>"> <%= current_user.name %>	
+						<% if current_user.image.present? %>
+							<img class="user-image img-rounded" src="<%= current_user.image %>">
+						<% else %>
+							<img class="user-image img-rounded" src="<%= asset_path('default_avatar.jpg') %>">
+						<% end %>
+						<%= current_user.name %>	
 					</li>
 					<li><%= link_to t('app.menu.my_pools'), user_predictions_path %></li>
 					<li><%= link_to t('app.menu.leaderboards'), leaderboards_path %></li>
 					<li><%= link_to t('app.menu.statistics'), stats_path %></li>
 					<li><%= link_to t('app.menu.rules'), pages_rules_path %></li>
-					<li><%= link_to t(:sign_out), signout_path, id: "sign_out", class: 'li-signout' %></li>
+					<li><%= link_to t(:sign_out), destroy_user_session_path, method: :delete, id: "sign_out", class: 'li-signout' %></li>
 				</ul>
 			</div>		
 		</div>

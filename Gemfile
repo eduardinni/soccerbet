@@ -45,6 +45,7 @@ gem 'newrelic_rpm'
 gem 'redis'
 gem 'leaderboard'
 
+gem 'devise'
 gem 'omniauth-facebook'
 gem 'fb_graph'
 

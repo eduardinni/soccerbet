@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
+  
+  devise_for :users, path_names: { sign_in: "login", sign_out: "logout" },
+                     controllers: {
+                                    omniauth_callbacks: "omniauth_callbacks",
+                                    sessions: "sessions",
+                                    registrations: "registrations"
+                                  }
+  
   # Facebook notifications callbacks
   post 'notifications', to: 'user_predictions#index'
   
+  # Static pages
   get 'pages/rules'
   post 'pages/rules', to: 'pages#agree_rules'
 

@@ -142,3 +142,6 @@ footer{
 .mobile-toolbar .li-signout{
 	border-top:1px solid #CCC;
 }
+.nav-tabs li a:focus{
+	outline:none;
+}

@@ -14,7 +14,11 @@ module PoolsHelper
   end
   
   def user_image_for(user_id)
-    User.find(user_id).image || nil
+    if User.find(user_id).image.present?
+      User.find(user_id).image
+    else
+      asset_path('default_avatar.jpg')
+    end
   end
   
   def odds_for_home_team(game)
