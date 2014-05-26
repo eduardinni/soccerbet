@@ -1,5 +1,5 @@
 es:
-  site_name: "Quiniela 2014"
+  site_name: "Quiniela Lomeli 2014"
   activerecord:
     models:
       game: 'Partido'
