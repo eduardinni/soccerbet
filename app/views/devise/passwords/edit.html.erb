@@ -14,6 +14,7 @@
 						<%= f.label :password, t('change_pass.new_password') %>
 						<%= f.password_field :password, autofocus: true, autocomplete: "off",
 											class: "form-control", placeholder: "" %>
+						<span class="help-block"><%= t('sign_up.password_tip') %></span>
 					</div>
 					<div class="form-group">
 						<%= f.label :password_confirmation, t('change_pass.new_password_confirm') %>
