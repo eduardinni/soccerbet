@@ -3,13 +3,8 @@
 		<p><%= image_tag('soccerbet_logo.png', alt: "SoccerBet", class: "img-responsive logo-login") %></p>
 		<p class="lead"><%= t(:site_name) %></p>
 		
-		<%= bootstrap_flash %>
-		<% if devise_error_messages! %>
-			<div class="alert alert-danger alert-dismissable text-left">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<%= devise_error_messages! %>
-			</div>
-		<% end %>
+		<%= devise_error_messages! %>
+		
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2 text-left">
 				<p class="lead"><%= t('sign_up.title') %></p>
@@ -25,6 +20,7 @@
 					<div class="form-group">
 						<%= f.label :password, t('sign_up.password') %>
 						<%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "" %>
+						<span class="help-block"><%= t('sign_up.password_tip') %></span>
 					</div>
 					<div class="form-group">
 						<%= f.label :password_confirmation, t('sign_up.password_confirm') %>
@@ -32,8 +28,17 @@
 					</div>
 					<%= f.submit t('sign_up.submit'), class: 'btn btn-success' %>
 				<% end %>
+				
+				<div class="row" style="margin-top:20px">
+					<div class="col-md-12">
+						<%= link_to new_user_session_path do %>
+							<i class="fa fa-arrow-left"></i> <%= t('sign_up.login') %>
+						<% end %>
+					</div>
+				</div>
 
 			</div>
 		</div>
 	</div>
+	
 </div>
