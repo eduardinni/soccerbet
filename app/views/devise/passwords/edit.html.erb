@@ -1,3 +1,33 @@
+<div class="row login-box">
+	<div class="col-md-12 text-center">
+		<p><%= image_tag('soccerbet_logo.png', alt: "SoccerBet", class: "img-responsive logo-login") %></p>
+		<p class="lead"><%= t(:site_name) %></p>
+		
+		<%= devise_error_messages! %>
+		
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2 text-left">
+				<p class="lead"><%= t('change_pass.title') %></p>
+				<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+					<%= f.hidden_field :reset_password_token %>
+					<div class="form-group">
+						<%= f.label :password, t('change_pass.new_password') %>
+						<%= f.password_field :password, autofocus: true, autocomplete: "off",
+											class: "form-control", placeholder: "" %>
+					</div>
+					<div class="form-group">
+						<%= f.label :password_confirmation, t('change_pass.new_password_confirm') %>
+						<%= f.password_field :password_confirmation, autofocus: true, autocomplete: "off", 
+											class: "form-control", placeholder: "" %>
+					</div>
+					<%= f.submit t('change_pass.submit'), class: 'btn btn-success' %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <h2>Change your password</h2>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>

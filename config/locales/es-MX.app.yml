@@ -53,6 +53,11 @@ es:
     title: 'Recuperar contraseña'
     email: 'Correo electrónico'
     submit: 'Enviar instrucciones'
+  change_pass:
+    title: 'Cambiar contraseña'
+    new_password: 'Nueva contraseña'
+    new_password_confirm: 'Confirmar nueva contraseña'
+    submit: 'Cambiar contraseña'
   sign_out: 'Salir'
   sign_in_successfully: 'Sesión iniciada'
   filter_all: 'Todos'
