@@ -49,6 +49,10 @@ es:
     password_confirm: 'Confirmar contraseña'
     login: 'Iniciar sesión'
     submit: 'Registrarse'
+  forgot_pass:
+    title: 'Recuperar contraseña'
+    email: 'Correo electrónico'
+    submit: 'Enviar instrucciones'
   sign_out: 'Salir'
   sign_in_successfully: 'Sesión iniciada'
   filter_all: 'Todos'

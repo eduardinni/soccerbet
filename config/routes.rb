@@ -4,7 +4,8 @@ Rails.application.routes.draw do
                      controllers: {
                                     omniauth_callbacks: "omniauth_callbacks",
                                     sessions: "sessions",
-                                    registrations: "registrations"
+                                    registrations: "registrations",
+                                    passwords: "passwords"
                                   }
   
   # Facebook notifications callbacks

@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   private
   
     def layout
-      (is_a?(Devise::SessionsController) || is_a?(Devise::RegistrationsController)) ? 'login' : 'application'
+      (is_a?(Devise::SessionsController) || is_a?(Devise::RegistrationsController) || is_a?(Devise::PasswordsController)) ? 'login' : 'application'
     end
   
     def set_pools
