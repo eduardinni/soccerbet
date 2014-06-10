@@ -1,0 +1,21 @@
+<% content_for :page_title, t('.title') %>
+
+<div class="row">
+	<div class="col-md-12">
+		<% @users.each do |user| %>
+			<div class="col-md-4 col-sm-6">
+				<div class="user-card">
+					<div class="media">
+						<%= link_to show_participant_path(user), class: "pull-left" do %>
+							<img class="media-object img-circle" src="<%= user_image_for(user.id) %>">
+						<% end %>
+						<div class="media-body">
+							<h4 class="media-heading"><%= user.name %></h4>
+							<%= link_to t('.more_info'), show_participant_path(user) %>
+						</div>
+					</div>		
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

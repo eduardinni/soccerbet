@@ -105,8 +105,6 @@ es:
     leaderboards:
       title: 'Posiciones'
       no_leaderboard: 'No hay posiciones'
-    participants:
-      title: 'Participantes'
     stats:
       title: 'Estadísticas'
       view_all_predictions: 'Ver todas las predicciones'
@@ -149,6 +147,13 @@ es:
       title: 'Mi predicción para este partido'
     edit:
       title: 'Mi predicción para este partido'
+  
+  participants:
+    index:
+      title: 'Participantes'
+      more_info: 'Más información'
+    show:
+      back_button: 'Lista de participantes'
 
   pages:
     rules:

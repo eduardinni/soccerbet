@@ -22,10 +22,12 @@ Rails.application.routes.draw do
   resources :team_groups
   resources :teams
   resources :pools
-  
+    
   get 'leaderboards', to: 'pools#leaderboards'
   get 'stats', to: 'pools#stats'
-  get 'participants', to: 'pools#participants'
+  
+  get 'participants', to: 'participants#index'
+  get 'participants/:user_id', to: 'participants#show', as: 'show_participant'
   
   # OmniAuth
   get 'login', to: 'sessions#login'

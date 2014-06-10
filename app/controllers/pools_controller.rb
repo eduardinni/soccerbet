@@ -37,11 +37,6 @@ class PoolsController < ApplicationController
       @user_predictions = current_user.predictions
     end
   end
-  
-  # GET /participants
-  def participants
-    @users = User.all
-  end
 
   # POST /pools
   # POST /pools.json

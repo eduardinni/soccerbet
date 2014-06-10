@@ -1,0 +1,51 @@
+.user-card{
+	background:#F6F6F6;
+	border:1px solid #E6E6E6;
+	border-bottom:4px solid #E6E6E6;
+	padding:15px;
+	font-size:12px;
+	height:90px;
+	min-height:90px;
+	max-height:90px;
+	margin-bottom:20px;
+}
+.user-card h4{
+	font-size:16px;
+}
+.user-card img{
+	height:55px;
+	width:55px;
+	border:2px solid #FFF;
+}
+
+.user-card-profile{
+	background:#F6F6F6;
+	border:1px solid #E6E6E6;
+	border-bottom:4px solid #E6E6E6;
+	padding:15px;
+	font-size:12px;
+	margin-bottom:20px;
+	text-align:center;
+}
+.user-card-profile h4{
+	font-size:16px;
+}
+.user-card-profile img{
+	height:70px;
+	width:70px;
+	border:3px solid #FFF;
+}
+.table-insights{
+	color:#999;
+	text-transform:uppercase;
+	font-size:12px;
+}
+.insight-value{
+	color:#767676;
+	font-size:22px;
+}
+.game-date{
+	color:#999;
+	display:inline-block;
+	padding-bottom:3px;
+}

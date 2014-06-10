@@ -117,5 +117,21 @@ class GameResultsController < ApplicationController
           prediction.points = points
           prediction.save
       end
+      
+      # update leaderboard position history for each user
+      game_users_predictions.each do |prediction|
+        history_pool = LeaderboardHistory.new
+        history_pool.user = prediction.user
+        history_pool.pool = game.pool.id
+        history_pool.rank = pool_leaderboard.rank_for(prediction.user.id)
+        history_pool.save
+        
+        history_global = LeaderboardHistory.new
+        history_global.user = prediction.user
+        history_global.pool = 'global'
+        history_global.rank = global_leaderboard.rank_for(prediction.user.id)
+        history_global.save
+      end
+      
     end
 end

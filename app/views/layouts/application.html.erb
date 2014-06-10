@@ -97,47 +97,52 @@
 	
 	<div class="container container-main">
 		<div class="row">
-			<div class="col-lg-9">
-				<div class="page-header">
-					<h1><%= yield(:page_title) %></h1>
-				</div>
+			<% if yield(:show_sidebar) == "false" %> <div class="col-lg-12"> <% else %> <div class="col-lg-9"> <% end %>
+				<% unless yield(:page_title).blank? %>
+					<div class="page-header">
+						<h1><%= yield(:page_title) %></h1>
+					</div>
+				<% end %>
 				<%= bootstrap_flash %>
 				<%= yield %>
 			</div>
-			<div class="col-lg-3">
-				<% if is_user_agreed_rules? %>
-					<div class="well well-scoreboard sidebar-nav hidden-sm hidden-xs">
-						<h3><%= t('app.modules.my_points') %></h3>
-						<p class="text-right scoreboard-legends"><span><%= t('app.modules.points_abbr') %></span> <span><%= t('app.modules.rank_abbr') %></span></p>
-						<ul class="nav nav-pills nav-stacked nav-scoreboard">
-							<% @my_pools.each do |pool| %>
+			
+			<% unless yield(:show_sidebar) == "false" %>
+				<div class="col-lg-3">
+					<% if is_user_agreed_rules? %>
+						<div class="well well-scoreboard sidebar-nav hidden-sm hidden-xs">
+							<h3><%= t('app.modules.my_points') %></h3>
+							<p class="text-right scoreboard-legends"><span><%= t('app.modules.points_abbr') %></span> <span><%= t('app.modules.rank_abbr') %></span></p>
+							<ul class="nav nav-pills nav-stacked nav-scoreboard">
+								<% @my_pools.each do |pool| %>
+									<li>
+										<%= pool.name %>
+										<span class="scoreboard-rank pull-right"><%= pool_user_rank(pool, current_user).rjust(3, '0') %></span>
+										<span class="scoreboard-score pull-right"><%= pool_user_points(pool, current_user).rjust(3, '0') %></span>
+									</li>
+								<% end %>
+								<li class="divider"></li>
 								<li>
-									<%= pool.name %>
-									<span class="scoreboard-rank pull-right"><%= pool_user_rank(pool, current_user) %></span>
-									<span class="scoreboard-score pull-right"><%= pool_user_points(pool, current_user) %></span>
+									<%= t('app.modules.global_score') %>							
+									<span class="scoreboard-rank pull-right"><%= global_user_rank(current_user).rjust(3, '0') %></span>
+									<span class="scoreboard-score scoreboard-score-global pull-right"><%= global_user_points(current_user).rjust(3, '0') %></span>
 								</li>
-							<% end %>
-							<li class="divider"></li>
-							<li>
-								<%= t('app.modules.global_score') %>							
-								<span class="scoreboard-rank pull-right"><%= global_user_rank(current_user) %></span>
-								<span class="scoreboard-score scoreboard-score-global pull-right"><%= global_user_points(current_user) %></span>
-							</li>
-						</ul>
-					</div>
-				<% end %>
+							</ul>
+						</div>
+					<% end %>
 				
-				<% if is_admin? %>
-					<div class="well well-sidebar sidebar-nav">
-						<h3><%= t('app.modules.admin') %></h3>
-						<ul class="nav nav-list">
-							<li><%= link_to t('games.index.title'), games_url  %></li>
-							<li><%= link_to t('pools.index.title'), pools_url  %></li>
-							<li><%= link_to t('teams.index.title'), teams_url  %></li>
-						</ul>
-					</div>
-				<% end %>
-			</div>
+					<% if is_admin? %>
+						<div class="well well-sidebar sidebar-nav">
+							<h3><%= t('app.modules.admin') %></h3>
+							<ul class="nav nav-list">
+								<li><%= link_to t('games.index.title'), games_url  %></li>
+								<li><%= link_to t('pools.index.title'), pools_url  %></li>
+								<li><%= link_to t('teams.index.title'), teams_url  %></li>
+							</ul>
+						</div>
+					<% end %>
+				</div>
+			<% end %>
 		</div>
 		<footer>
 			<p>&copy; 2014. SoccerBet is released under <a href="http://opensource.org/licenses/MIT" target="_blank">MIT License</a> by edulomeli. <a href="https://github.com/edulomeli/soccerbet"><i class="fa fa-github-alt"></i> GitHub Project</a></p>

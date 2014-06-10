@@ -1,0 +1,95 @@
+<% content_for :show_sidebar, "false" %>
+
+<div class="row">
+	<div class="col-md-3">
+		<div class="user-card-profile">
+			<img class="img-circle" src="<%= user_image_for(@user.id) %>">
+			<h4><%= @user.name %></h4>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<%= link_to participants_path do %>
+					<i class="fa fa-arrow-left"></i> <%= t('.back_button') %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-9">
+		<table class="table table-bordered text-center table-insights">
+			<tr>
+				<td width="25%">
+					<span class="insight-value"><%= global_user_points(current_user) %></span><br>
+					Puntos (Global)
+				</td>
+				<td>
+					<span class="insight-value"><%= @user_result_success_rate %>%</span><br>
+					Aciertos a marcador
+				</td>
+				<td>
+					<span class="insight-value"><%= @user_winner_success_rate %>%</span><br>
+					Aciertos a resultado
+				</td>
+			</tr>
+		</table>
+		
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Partido</th>
+					<th class="text-center">Predicción</th>
+					<th class="text-center">Marcador final</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @games.each do |game| %>
+					
+					<% game_user_prediction = @user_predictions.where(game: game).first %>
+					
+					<tr>
+						<td>
+							<p><span class="game-date"><%= l game.play_at, format: :full_condensed %> <%= l game.play_at, format: :hour %></span><br>
+								<span class="pred-team-name"><%= game.home_team.shortname %></span> <%= image_tag("flags/#{game.home_team.image}") %> VS
+								<%= image_tag("flags/#{game.visitor_team.image}") %> <span class="pred-team-name"><%= game.visitor_team.shortname %></span>
+							</p>
+						</td>
+						<td class="text-center">
+							<% if game_user_prediction.present? %>
+								<% if game_user_prediction.winner == 'h' %>
+									<strong><%= game_user_prediction.home_team_goals %></strong> : <%= game_user_prediction.visitor_team_goals %>
+								<% elsif game_user_prediction.winner == 'v' %>
+									<%= game_user_prediction.home_team_goals %> : <strong><%= game_user_prediction.visitor_team_goals %></strong>
+								<% else %>
+									<%= game_user_prediction.home_team_goals.present? ? game_user_prediction.home_team_goals : '-' %>
+									:
+									<%= game_user_prediction.visitor_team_goals.present? ? game_user_prediction.visitor_team_goals : '-' %>
+								<% end%>
+							<% else %>
+								- : -
+							<% end %>
+						</td>
+						<td class="text-center">
+							<% if game.game_result.present? %>
+								<%= game.game_result.home_team_goals %> : <%= game.game_result.visitor_team_goals %>
+							<% else %>
+								- : -
+							<% end %>
+						</td>
+						<td class="text-center">
+							<% if game.game_result.present? and game_user_prediction.present? and game_user_prediction.points.present?%>
+								<% if game_user_prediction.points == 3 %>
+									<span class="label label-success"><span class="fa fa-plus"></span> 3 puntos</span>
+								<% elsif game_user_prediction.points == 1 %>
+									<span class="label label-success"><span class="fa fa-plus"></span> 1 punto</span>
+								<% elsif game_user_prediction.points == 0 %>
+									<span class="label label-default">0 puntos</span>
+								<% end %>
+							<% end %>
+						</td>
+					</tr>
+					
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
