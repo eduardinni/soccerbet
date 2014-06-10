@@ -45,3 +45,31 @@
 /*	font-size:12px;*/
 /*	background:#EFEFEF;*/
 }
+.pred-graph{
+	width:auto;
+	margin-top:8px;
+}
+.pred-graph-home, .pred-graph-draw, .pred-graph-visitor{
+	width:0%;
+	height:0;
+	float:left;
+	overflow:hidden;
+	margin:0;
+	padding:3px 0;
+	font-size: 75%;
+    font-weight: 400;
+}
+.pred-graph-home{
+	background:#47ACB1;
+	color:#FFF;
+}
+.pred-graph-draw{
+	background:#E6E6E6;
+	text-transform:uppercase;
+	color:#666;
+}
+.pred-graph-visitor{
+	background:#F26522;
+/*	background:#4E80A6;*/
+	color:#FFF;
+}

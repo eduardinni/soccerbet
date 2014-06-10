@@ -18,10 +18,10 @@
 //= require turbolinks
 //= require_tree .
 
-$(function(){
-	$(document).on('page:load', function(){
-		$('[data-spy="affix"]').each(function () {
-			$(this).affix({offset:{top: 50}});
-		});
+$(document).on('page:change', function(){
+	$('[data-spy="affix"]').each(function () {
+		$(this).affix({offset:{top: 50}});
 	});
+		
+	$('.selectpicker').selectpicker({ 'selectedText': '',style:'btn-lg' });
 });

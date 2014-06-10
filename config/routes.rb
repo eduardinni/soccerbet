@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   
   get 'leaderboards', to: 'pools#leaderboards'
   get 'stats', to: 'pools#stats'
+  get 'participants', to: 'pools#participants'
   
   # OmniAuth
   get 'login', to: 'sessions#login'

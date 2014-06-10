@@ -22,7 +22,7 @@
 							</h3>
 						</div>
 						<div class="panel-body">
-							<%= f.text_field :home_team_goals, class: 'form-control select-goals', maxlength: 2, autocomplete: "off" %>							
+							<%= f.select :home_team_goals, (0..9), {include_blank: true}, {class: 'selectpicker', 'data-width' => "70px"} %>							
 						</div>
 					</div>
 				</div>
@@ -40,7 +40,7 @@
 							</h3>
 						</div>
 						<div class="panel-body">
-							<%= f.text_field :visitor_team_goals, class: 'form-control select-goals', maxlength: 2, autocomplete: "off" %>
+							<%= f.select :visitor_team_goals, (0..9), {include_blank: true}, {class: 'selectpicker', 'data-width' => "70px"} %>
 						</div>
 					</div>
 				</div>

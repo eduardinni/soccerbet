@@ -4,12 +4,6 @@
 	<div class="col-md-12">
 		<div class="alert alert-default text-muted">
 			<p>Las estadísticas se obtienen de las predicciones hechas por todos los participantes de la quiniela.</p>
-			<p>Leyenda:</p>
-			<p>
-				<span class="label label-primary">Local</span>
-				<span class="label label-default">Empate</span>
-				<span class="label label-info">Visitante</span>
-			</p>
 		</div>
 	</div>
 </div>
@@ -46,33 +40,41 @@
 				<div class="col-md-12">
 					<div class="row pred-game-info">
 						<div class="col-md-12">
-							<span class="no-wrap"><%= l game.play_at, format: :hour %> - 
-							<%= game.pool.present? ? tag_label(game.pool.name, :pool) : tag_label('ND', :default) %></span>
-							<%= link_to t('.view_all_predictions'), game_predictions_path(game), class: 'btn btn-default btn-xs pull-right' %>
+							<span class="no-wrap">
+								<%= l game.play_at, format: :hour %> - 
+								<%= game.pool.present? ? tag_label(game.pool.name, :pool) : tag_label('ND', :default) %>
+							</span>
 						</div>
 					</div>
 					<div class="row pred-game-wrapper">
-						<div class="col-md-4 col-sm-4 col-xs-2">
+						<div class="col-md-2 col-sm-2 col-xs-2">
 							<div class="pred-team-wrapper">
 								<%= image_tag("flags/#{game.home_team.image}") %>
-								<span class="pred-team-name hidden-xs"><%= game.home_team.name %></span>
-								<span class="pred-team-name visible-xs"><%= game.home_team.shortname %></span>
 							</div>
 						</div>
 
-						<div class="col-md-4 col-sm-4 col-xs-8 text-center">
-							<p class="pred-pool">
-								<span class="label label-primary"><%= odds_for_home_team(game) %>%</span>
-								<span class="label label-default"><%= odds_for_draw_game(game) %>%</span>
-								<span class="label label-info"><%= odds_for_visitor_team(game) %>%</span>
+						<div class="col-md-8 col-sm-8 col-xs-8">
+							<div class="pred-graph">
+								<div class="pred-graph-home text-left" style="width:<%= odds_for_home_team(game) %>%; <%= "height:auto" if odds_for_home_team(game).floor > 0 %>">
+									&nbsp;&nbsp; <%= game.home_team.name %> (<%= odds_for_home_team(game) %>%)
+								</div>
+								<div class="pred-graph-draw text-center" style="width:<%= odds_for_draw_game(game) %>%; <%= "height:auto" if odds_for_draw_game(game).floor > 0 %>">
+									<%= t('.draw') %> (<%= odds_for_draw_game(game) %>%)
+								</div>
+								<div class="pred-graph-visitor text-right" style="width:<%= odds_for_visitor_team(game) %>%; <%= "height:auto" if odds_for_visitor_team(game).floor > 0 %>">
+									(<%= odds_for_visitor_team(game) %>%) <%= game.visitor_team.name %> &nbsp;&nbsp;
+								</div>
+								<div style="clear:both;"></div>
+							</div>
+							<p class="text-center" style="margin-top:7px">
+								<%= link_to t('.view_all_predictions'), game_predictions_path(game), class: 'btn btn-link btn-xs' %>
 							</p>
+							
 						</div>
 
-						<div class="col-md-4 col-sm-4 col-xs-2 text-right">
+						<div class="col-md-2 col-sm-2 col-xs-2 text-right">
 							<p class="pred-team-wrapper">
-								<span class="pred-team-name hidden-xs"><%= game.visitor_team.name %></span>
 								<%= image_tag("flags/#{game.visitor_team.image}") %>
-								<span class="pred-team-name visible-xs"><%= game.visitor_team.shortname %></span>
 							</p>
 						</div>
 					</div>

@@ -1,0 +1,24 @@
+<% content_for :page_title, t('.title') %>
+
+<div class="row">
+	<div class="col-md-12">
+		<table class="table">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Puntos</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @users.each do |user| %>
+					<tr>
+						<td><%= user.name %></td>
+						<td></td>
+						<td>Predicciones</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

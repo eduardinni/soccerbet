@@ -90,7 +90,9 @@
 									<% elsif game_user_prediction.winner == 'v' %>
 										<%= game_user_prediction.home_team_goals %> : <strong><%= game_user_prediction.visitor_team_goals %></strong>
 									<% else %>
-										<%= game_user_prediction.home_team_goals %> : <%= game_user_prediction.visitor_team_goals %>
+										<%= game_user_prediction.home_team_goals.present? ? game_user_prediction.home_team_goals : '-' %>
+										:
+										<%= game_user_prediction.visitor_team_goals.present? ? game_user_prediction.visitor_team_goals : '-' %>
 									<% end%>
 								</p>
 								<% if game.ontime_to_edit? %>

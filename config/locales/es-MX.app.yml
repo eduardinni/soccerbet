@@ -1,5 +1,5 @@
 es:
-  site_name: "Quiniela Lomeli 2014"
+  site_name: "Quiniela 2014"
   activerecord:
     models:
       game: 'Partido'
@@ -89,6 +89,7 @@ es:
       my_pools: 'Mis quinielas'
       leaderboards: 'Posiciones'
       statistics: 'Estadísticas'
+      participants: 'Participantes'
       rules: 'Reglas'
       
       
@@ -104,9 +105,12 @@ es:
     leaderboards:
       title: 'Posiciones'
       no_leaderboard: 'No hay posiciones'
+    participants:
+      title: 'Participantes'
     stats:
       title: 'Estadísticas'
       view_all_predictions: 'Ver todas las predicciones'
+      draw: 'Empate'
   
   games:
     index:

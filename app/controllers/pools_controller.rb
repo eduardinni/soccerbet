@@ -1,5 +1,5 @@
 class PoolsController < ApplicationController
-  before_filter :authorize_admin, except: [:leaderboards, :stats]
+  before_filter :authorize_admin, except: [:leaderboards, :stats, :participants]
   before_action :set_pool, only: [:show, :edit, :update, :destroy]
 
   # GET /pools
@@ -36,6 +36,11 @@ class PoolsController < ApplicationController
       @games = Game.where(pool_id: params[:pool])
       @user_predictions = current_user.predictions
     end
+  end
+  
+  # GET /participants
+  def participants
+    @users = User.all
   end
 
   # POST /pools
