@@ -55,13 +55,13 @@
 
 						<div class="col-md-8 col-sm-8 col-xs-8">
 							<div class="pred-graph">
-								<div class="pred-graph-home text-left" style="width:<%= odds_for_home_team(game) %>%; <%= "height:auto" if odds_for_home_team(game).floor > 0 %>">
+								<div class="pred-graph-home text-left" style="width:<%= odds_for_home_team(game).floor %>%; <%= "height:auto" if odds_for_home_team(game).floor > 0 %>">
 									<%= game.home_team.shortname %><br> <%= odds_for_home_team(game) %>%
 								</div>
-								<div class="pred-graph-draw text-center" style="width:<%= odds_for_draw_game(game) %>%; <%= "height:auto" if odds_for_draw_game(game).floor > 0 %>">
+								<div class="pred-graph-draw text-center" style="width:<%= odds_for_draw_game(game).floor %>%; <%= "height:auto" if odds_for_draw_game(game).floor > 0 %>">
 									<%= t('.draw') %><br> <%= odds_for_draw_game(game) %>%
 								</div>
-								<div class="pred-graph-visitor text-right" style="width:<%= odds_for_visitor_team(game) %>%; <%= "height:auto" if odds_for_visitor_team(game).floor > 0 %>">
+								<div class="pred-graph-visitor text-right" style="width:<%= odds_for_visitor_team(game).floor %>%; <%= "height:auto" if odds_for_visitor_team(game).floor > 0 %>">
 									 <%= game.visitor_team.shortname %><br>
 									 <%= odds_for_visitor_team(game) %>%
 								</div>
