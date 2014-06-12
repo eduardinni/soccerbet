@@ -1,6 +1,6 @@
 class ParticipantsController < ApplicationController
   def index
-    @users = User.all
+    @users = User.order('name ASC')
   end
 
   def show
