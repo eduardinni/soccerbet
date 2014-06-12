@@ -108,7 +108,7 @@ es:
     stats:
       title: 'Estadísticas'
       view_all_predictions: 'Ver todas las predicciones'
-      draw: 'Empate'
+      draw: 'Emp'
   
   games:
     index:
