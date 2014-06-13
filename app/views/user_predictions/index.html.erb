@@ -10,15 +10,15 @@
 					<% @my_pools.each do |pool| %>
 						<li>
 							<%= pool.name %>
-							<span class="scoreboard-rank pull-right"><%= pool_user_rank(pool, current_user) %></span>
-							<span class="scoreboard-score pull-right"><%= pool_user_points(pool, current_user) %></span>
+							<span class="scoreboard-rank pull-right"><%= pool_user_rank(pool, current_user).rjust(3, '0') %></span>
+							<span class="scoreboard-score pull-right"><%= pool_user_points(pool, current_user).rjust(3, '0') %></span>
 						</li>
 					<% end %>
 					<li class="divider"></li>
 					<li>
 						<%= t('app.modules.global_score') %>							
-						<span class="scoreboard-rank pull-right"><%= global_user_rank(current_user) %></span>
-						<span class="scoreboard-score scoreboard-score-global pull-right"><%= global_user_points(current_user) %></span>
+						<span class="scoreboard-rank pull-right"><%= global_user_rank(current_user).rjust(3, '0') %></span>
+						<span class="scoreboard-score scoreboard-score-global pull-right"><%= global_user_points(current_user).rjust(3, '0') %></span>
 					</li>
 				</ul>
 			</div>
