@@ -97,6 +97,7 @@ class GameResultsController < ApplicationController
       
       game_users_predictions.each do |prediction|
           
+          next unless prediction.user.present?
           next unless prediction.user.paid?
           
           if (@game_result.home_team_goals == prediction.home_team_goals) and (@game_result.visitor_team_goals == prediction.visitor_team_goals)
@@ -124,6 +125,7 @@ class GameResultsController < ApplicationController
       # update leaderboard position history for each user
       game_users_predictions.each do |prediction|
         
+        next unless prediction.user.present?
         next unless prediction.user.paid?
         
         history_pool = LeaderboardHistory.new
