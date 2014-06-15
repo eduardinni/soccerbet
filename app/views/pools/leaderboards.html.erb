@@ -11,7 +11,7 @@
 							<td width="30"><%= member[:rank] %></td>
 							<td>
 								<img class="user-image img-rounded" src="<%= user_image_for(member[:member]) %>">
-								<%= user_name_for(member[:member]) %>
+								<%= link_to user_name_for(member[:member]), show_participant_path(member[:member]) %>
 							</td>
 							<td><%= member[:score].to_i %></td>
 						</tr>
@@ -45,7 +45,7 @@
 											<td width="30"><%= member[:rank] %></td>
 											<td>
 												<img class="user-image img-rounded" src="<%= user_image_for(member[:member]) %>">
-												<%= user_name_for(member[:member]) %>
+												<%= link_to user_name_for(member[:member]), show_participant_path(member[:member]) %>
 											</td>
 											<td><%= member[:score].to_i %></td>
 										</tr>
