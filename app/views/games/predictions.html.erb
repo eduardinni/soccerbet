@@ -45,17 +45,17 @@
 				<tr>
 					<td>
 						<img class="user-image img-rounded" src="<%= user_image_for(user) %>">
-						<%= user.name %>
+						<%= link_to user.name, show_participant_path(user) %>
 					</td>
 					<% if user_prediction.present? %>
 						<td class="text-center">
 							<% if @game.game_result.present? %>
 								<% if user_prediction.points == 3 %>
-									<span class="label label-success"><span class="fa fa-plus"></span> 3 puntos</span>
+									<span class="label label-success"><span class="fa fa-plus"></span> 3p</span>
 								<% elsif user_prediction.points == 1 %>
-									<span class="label label-success"><span class="fa fa-plus"></span> 1 punto</span>
+									<span class="label label-primary"><span class="fa fa-plus"></span> 1p</span>
 								<% elsif user_prediction.points == 0 %>
-									<span class="label label-default">0 puntos</span>
+									<span class="label label-default">0p</span>
 								<% end %>
 							<% end %>
 						</td>

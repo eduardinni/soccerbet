@@ -78,11 +78,11 @@
 						<td class="text-center">
 							<% if game.game_result.present? and game_user_prediction.present? and game_user_prediction.points.present?%>
 								<% if game_user_prediction.points == 3 %>
-									<span class="label label-success"><span class="fa fa-plus"></span> 3 puntos</span>
+									<span class="label label-success"><span class="fa fa-plus"></span> 3p</span>
 								<% elsif game_user_prediction.points == 1 %>
-									<span class="label label-success"><span class="fa fa-plus"></span> 1 punto</span>
+									<span class="label label-primary"><span class="fa fa-plus"></span> 1p</span>
 								<% elsif game_user_prediction.points == 0 %>
-									<span class="label label-default">0 puntos</span>
+									<span class="label label-default">0p</span>
 								<% end %>
 							<% end %>
 						</td>
